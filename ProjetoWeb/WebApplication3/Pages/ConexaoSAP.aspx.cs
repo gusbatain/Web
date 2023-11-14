@@ -29,7 +29,7 @@ namespace WebApplication3.Pages
                 company.Password = "GB45@Lab";
                 company.language = BoSuppLangs.ln_English;
 
-                 int error = company.Connect();
+                int error = company.Connect();
 
                 if (error == 0)
                 {

@@ -42,6 +42,24 @@ namespace WebApplication3.Pages
         protected global::System.Web.UI.WebControls.TextBox txtFname;
 
         /// <summary>
+        /// Controle txtCode.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCode;
+
+        /// <summary>
+        /// Controle txtForeign.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtForeign;
+
+        /// <summary>
         /// Controle txtLname.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace WebApplication3.Pages
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLname;
+
+        /// <summary>
+        /// Controle txtForName.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtForName;
 
         /// <summary>
         /// Controle txtEmail.
@@ -76,6 +103,15 @@ namespace WebApplication3.Pages
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAdress;
+
+        /// <summary>
+        /// Controle rblUserType.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblUserType;
 
         /// <summary>
         /// Controle SignUp.

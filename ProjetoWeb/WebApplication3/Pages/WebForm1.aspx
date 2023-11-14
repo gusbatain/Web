@@ -24,7 +24,12 @@
                     <div class="form-outline mb-4">
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control form-control-lg"
                             placeholder="Enter Email"></asp:TextBox>
-                        <label class="form-label" for="form3Example3">First Name</label>
+                         <asp:Label ID="LabelEmail" runat="server" class="form-label" Text="Email"></asp:Label>
+
+                        <asp:TextBox ID="txtCode" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="Enter CardCode" Visible="false"></asp:TextBox>
+                         <asp:Label ID="LabelCardCode" runat="server" class="form-label" Text="CardName" Visible="false"></asp:Label>
+                        
                     </div>
 
                     <!-- Password input -->
@@ -32,10 +37,13 @@
 
                         <asp:TextBox ID="txtLname" runat="server" placeholder="Enter LastName"
                             CssClass="form-control form-control-lg"></asp:TextBox>
+                        <asp:Label ID="LabelLastName" runat="server" class="form-label" Text="LastName"></asp:Label>
+                       
 
-                        <label class="form-label" for="form3Example4">LastName</label>
+                        <asp:TextBox ID="txtForName" runat="server" CssClass="form-control form-control-lg"
+                            placeholder="Enter CardName" Visible="false"></asp:TextBox>
+                        <asp:Label ID="LabelCardName" runat="server" class="form-label" Text="CardName" Visible="false"></asp:Label>
                     </div>
-
 
                     <asp:Label ID="LabelPass" runat="server" Text="password or email is incorrect"
                         Visible="False" Style="color: red;"></asp:Label>
@@ -43,19 +51,29 @@
                     <asp:Label ID="LabelEmpty" runat="server" Text="Fill in the User and Password fields"
                         Visible="False" Style="color: red;"></asp:Label>
 
+                    <asp:Label ID="Texto" runat="server"
+                        Visible="False" Style="color: red;"></asp:Label>
+
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- Checkbox -->
-
+                        <asp:RadioButtonList ID="rblUserType" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="rblUserType_SelectedIndexChanged">
+                            <asp:ListItem Text="Funcionário" Value="Employee" Selected="true"></asp:ListItem>
+                            <asp:ListItem Text="Fornecedor" Value="Vendor"></asp:ListItem>
+                        </asp:RadioButtonList>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
+
 
                             <asp:Button ID="Button1" runat="server" Text="Login" class="btn btn-primary btn-lg" OnClick="Button1_Click"
                                 Style="padding-left: 2.5rem; padding-right: 2.5rem;" />
 
+                            <%-- <asp:Button ID="BtnTestCSAP" runat="server" Text="Conexao SAp" class="btn btn-primary btn-lg" Onclick="BtnTestCSAP_Click"
+                                Style="padding-left: 2.5rem; padding-right: 2.5rem;" />--%>
+
                             <p class="small fw-bold mt-2 pt-1 mb-0">
                                 Don't have an account? <a href="Registro"
                                     class="link-danger">Register</a>
-                                
+
 
                             </p>
                         </div>

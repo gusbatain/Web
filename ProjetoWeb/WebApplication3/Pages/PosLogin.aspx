@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PosLogin.aspx.cs" Inherits="WebApplication3.Pages.PosLogin" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="stylesheet" href="../Content/bootstrap.css" />
@@ -15,7 +14,7 @@
                     <div class="col">
                         <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
                             <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item"><a href="WebForm1">Logging out </a></li>
+                                <asp:LinkButton ID="Logout" runat="server" CssClass="breadcrumb-item" OnClick="Logout_Click" >Log Out</asp:LinkButton>
                             </ol>
                         </nav>
                     </div>
@@ -48,24 +47,35 @@
                                     <p class="mb-0">Full Name</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">Johnatan Smith</p>
+                                    <asp:Label ID="TxtNomeC" runat="server" CssClass="text-muted mb-0"></asp:Label>
                                 </div>
                             </div>
+
 
                             <div class="row">
                                 <div class="col-sm-3">
                                     <p class="mb-0">Email</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <asp:Label ID="txtEmail" runat="server" class="text-muted mb-0" ></asp:Label>
-                                    
-
+                                    <asp:Label ID="txtEmail" runat="server" class="text-muted mb-0"></asp:Label>
                                 </div>
                             </div>
-                            <hr />
+
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Usuario</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <asp:Label ID="txtUsuario" runat="server" class="text-muted mb-0"></asp:Label>
+                                </div>
+                            </div>
+
                         </div>
+                        <hr />
                     </div>
                 </div>
+            </div>
             </div>
         </section>
         <div>

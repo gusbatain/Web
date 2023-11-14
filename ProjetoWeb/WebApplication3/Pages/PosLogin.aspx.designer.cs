@@ -24,6 +24,15 @@ namespace WebApplication3.Pages
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Controle Logout.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Logout;
+
+        /// <summary>
         /// Controle txtFname.
         /// </summary>
         /// <remarks>
@@ -51,6 +60,15 @@ namespace WebApplication3.Pages
         protected global::System.Web.UI.WebControls.Label txtAdress;
 
         /// <summary>
+        /// Controle TxtNomeC.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TxtNomeC;
+
+        /// <summary>
         /// Controle txtEmail.
         /// </summary>
         /// <remarks>
@@ -58,5 +76,14 @@ namespace WebApplication3.Pages
         /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label txtEmail;
+
+        /// <summary>
+        /// Controle txtUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Para modificar, mova a declaração de campo do arquivo de designer a um arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label txtUsuario;
     }
 }

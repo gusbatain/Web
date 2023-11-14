@@ -5,84 +5,110 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net;
+
 
 namespace WebApplication3.Pages
 {
     public partial class WebForm3 : System.Web.UI.Page
     {
-        public static Company company = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            company = new Company();
-            company.Server = "DESKTOP-73SFH92";
-            company.DbServerType = BoDataServerTypes.dst_MSSQL2017;
-            company.CompanyDB = "SBO_Car";
-            company.UserName = "manager";
-            company.Password = "GB45@Lab";
-            company.language = BoSuppLangs.ln_English;
             txtFname.Focus();
-
+            if (!IsPostBack)
+            {
+                txtFname.Visible = (rblUserType.SelectedValue == "Employee");
+                txtAdress.Visible = (rblUserType.SelectedValue == "Employee");
+                txtJobtitle.Visible = (rblUserType.SelectedValue == "Employee");
+                txtLname.Visible = (rblUserType.SelectedValue == "Employee");
+                txtEmail.Visible = (rblUserType.SelectedValue == "Employee");
+            }
         }
 
         protected void SignUp_Click(object sender, EventArgs e)
         {
-            int Resultado = company.Connect();
+            Company company = Application["SAPConnection"] as Company;
 
-            if (Resultado == 0)
+            try
             {
-                try
+                if (company != null && company.Connected)
                 {
+                    string userType = rblUserType.SelectedValue;
 
-
-                    SAPbobsCOM.EmployeesInfo employeesInfo = company.GetBusinessObject(BoObjectTypes.oEmployeesInfo);
-
-                    string firstName = txtFname.Text;
-                    string lastName = txtLname.Text;
-                    string Email = txtEmail.Text;
-                    string jobtitle = txtJobtitle.Text;
-                    string adress = txtAdress.Text;
-
-                    if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(jobtitle) || string.IsNullOrEmpty(adress))
+                    if (userType == "Employee")
                     {
-                        LabelEmpty.Visible = true;
-                        LabelEmpty.Text = "Preencha todos os campos obrigatórios.";
-                    }
+                        SAPbobsCOM.EmployeesInfo employeesInfo = company.GetBusinessObject(BoObjectTypes.oEmployeesInfo);
 
-                    else
-                    {
-                        employeesInfo.FirstName = firstName;
-                        employeesInfo.LastName = lastName;
-                        employeesInfo.eMail = Email;
-                        employeesInfo.JobTitle = jobtitle;
-                        employeesInfo.WorkCity = adress;
-                        
-                        if(employeesInfo.Add()  == 0)
+                        string firstName = txtFname.Text;
+                        string lastName = txtLname.Text;
+                        string email = txtEmail.Text;
+                        string jobTitle = txtJobtitle.Text;
+                        string address = txtAdress.Text;
+
+                        if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(jobTitle) || string.IsNullOrEmpty(address))
                         {
-                            string empIDStr = company.GetNewObjectKey();
-                            int empID = int.Parse(empIDStr);
-                            Session["empID"] = empID;
-                            Response.Redirect("PosLogin.aspx");
+                            LabelEmpty.Visible = true;
+                            LabelEmpty.Text = "Preencha todos os campos obrigatórios.";
                         }
+                        else
+                        {
+                            employeesInfo.FirstName = firstName;
+                            employeesInfo.LastName = lastName;
+                            employeesInfo.eMail = email;
+                            employeesInfo.JobTitle = jobTitle;
+                            employeesInfo.WorkCity = address;
 
-                        LabelEmpty.Visible = true;
-                        LabelEmpty.Text = "Funcionário cadastrado com sucesso";
+                            if (employeesInfo.Add() == 0)
+                            {
+                                LabelEmpty.Visible = true;
+                                LabelEmpty.Text = "Funcionário cadastrado com sucesso";
+                            }
+                            else
+                            {
+                                LabelEmpty.Visible = true;
+                                LabelEmpty.Text = $"Erro ao cadastrar funcionário: {company.GetLastErrorDescription()}";
+                            }
+                        }
+                    }
+                    else if (userType == "Vendor")
+                    {
+                        SAPbobsCOM.BusinessPartners businessPartners = company.GetBusinessObject(BoObjectTypes.oBusinessPartners);
 
+                        string Code = txtCode.Text;
+                        string Name = txtForName.Text;
+                        string NameForeign = txtForeign.Text;
+                        string Email = txtEmail.Text;
+                        string WorkCity = txtAdress.Text;
 
+                        if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name))
+                        {
+                            LabelEmpty.Visible = true;
+                            LabelEmpty.Text = "Preencha todos os campos obrigatórios.";
+                        }
+                        else
+                        {
+                            businessPartners.CardCode = Code;
+                            businessPartners.CardName = Name;
+                            businessPartners.CardForeignName = NameForeign;
+                            businessPartners.City = WorkCity;
+                            businessPartners.EmailAddress = Email;
+
+                            if (businessPartners.Add() == 0)
+                            {
+                                LabelEmpty.Visible = true;
+                                LabelEmpty.Text = "Funcionário cadastrado com sucesso";
+                            }
+                        }
                     }
                 }
-
-                catch (Exception ex)
+                else
                 {
-                    Response.Write($"Erro: {ex.Message}");
-                }
-                finally
-                {
-                    company.Disconnect();
+                    Response.Write($"Falha na conexão. Código de erro: {company.GetLastErrorDescription()}");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Response.Write($"Falha na conexão. Código de erro: {company.GetLastErrorDescription()}");
+                Response.Write($"Erro: {ex.Message}");
             }
         }
 
@@ -90,15 +116,40 @@ namespace WebApplication3.Pages
         {
             Response.Redirect("WebForm1.aspx");
         }
+
+        protected void rblUserType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Updatevisibility();
+
+        }
+
+        private void Updatevisibility()
+        {
+            if (rblUserType.SelectedValue == "Vendor")
+            {
+                bool Vendor = (rblUserType.SelectedValue == "Vendor");
+
+                txtFname.Visible = !Vendor;
+                txtAdress.Visible = Vendor;
+                txtJobtitle.Visible = !Vendor;
+                txtLname.Visible = !Vendor;
+                txtEmail.Visible = Vendor;
+                txtForName.Visible = Vendor;
+                txtCode.Visible = Vendor;
+                txtForeign.Visible = Vendor;
+            }
+            else
+            {
+                bool Employee = (rblUserType.SelectedValue == "Employee");
+                txtFname.Visible = Employee;
+                txtAdress.Visible = Employee;
+                txtJobtitle.Visible = Employee;
+                txtLname.Visible = Employee;
+                txtEmail.Visible = Employee;
+                txtForName.Visible = !Employee;
+                txtCode.Visible = !Employee;
+                txtForeign.Visible = !Employee;
+            }
+        }
     }
-
-
 }
-
-
-
-
-
-
-
-

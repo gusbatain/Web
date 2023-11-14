@@ -41,12 +41,20 @@
                                                 <asp:TextBox ID="txtFname" runat="server" type="First name" class="form-control"
                                                     placeholder="First name"></asp:TextBox>
 
+                                                <asp:TextBox ID="txtCode" runat="server" type="Code" Visible="false" class="form-control"
+                                                    placeholder="CardCode"></asp:TextBox>
+
+                                                <asp:TextBox ID="txtForeign" runat="server" type="Code" Visible="false" class="form-control"
+                                                    placeholder="CardForeignName"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-4">
                                             <div class="form-outline">
                                                 <asp:TextBox ID="txtLname" runat="server" type="Last name" class="form-control"
                                                     placeholder="Last name"></asp:TextBox>
+
+                                                <asp:TextBox ID="txtForName" runat="server" type="CardName" Visible="false" class="form-control"
+                                                    placeholder="CardName"></asp:TextBox>
 
                                             </div>
                                         </div>
@@ -61,7 +69,7 @@
 
                                     <!-- Password input -->
                                     <div class="form-outline mb-4">
-                                        <asp:TextBox ID="txtJobtitle" runat="server"  class="form-control"
+                                        <asp:TextBox ID="txtJobtitle" runat="server" class="form-control"
                                             placeholder="job Title"></asp:TextBox>
 
                                     </div>
@@ -73,6 +81,13 @@
 
 
                                     <!-- Checkbox -->
+                                    <div class="form-check">
+
+                                        <asp:RadioButtonList ID="rblUserType" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="rblUserType_SelectedIndexChanged">
+                                            <asp:ListItem Text="Funcionário" Value="Employee" Selected="true"></asp:ListItem>
+                                            <asp:ListItem Text="Fornecedor" Value="Vendor"></asp:ListItem>
+                                        </asp:RadioButtonList>
+                                    </div>
 
                                     <!-- Submit button -->
 
